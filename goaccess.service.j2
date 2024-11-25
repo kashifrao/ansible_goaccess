@@ -1,0 +1,16 @@
+[Unit]
+Description=Goaccess Web log report.
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+Restart=always
+ExecStart=/bin/goaccess -g -f /var/log/httpd/access_log --log-format=COMBINED -a -o /var/www/goaccess/public/index.html --real-time-html --ws-url "goaccess.{{ project_domain }}"
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
+
